@@ -1,22 +1,21 @@
 import socket
 import select
 import sys
-from thread import *
+from _thread import *
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-if len(sys.argv) != 3:
-    print ("Usage: script, IP address, port number")
-    exit()
+# if len(sys.argv) != 3:
+#    print ("Usage: script, IP address, port number")
+#    exit()
  
-
-IP= str(sys.argv[1])
  
-Port = int(sys.argv[2])
  
-IP = 192.168.1.1
-Port = 2000
+Port = 3000 #int(sys.argv[2])
+ 
+IP = "127.0.0.1"
+Port = 3000
 server.bind((IP, Port))
 
 server.listen(100)
@@ -29,7 +28,7 @@ def clientthread(conn, addr):
             if message:
                 print ("<" + addr[0] + "> " + message)
             else:
-                remove(conn)
+                remove(conn) 
         except:
             continue
 def broadcast(message, connection):
@@ -53,4 +52,3 @@ while True:
  
 conn.close()
 server.close()
-
