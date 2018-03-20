@@ -14,14 +14,14 @@ server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
  
 Port = 3000 #int(sys.argv[2])
  
-IP = "127.0.0.1"
-Port = 3000
+IP = "10.144.118.26"
+Port = 8081
 server.bind((IP, Port))
 
 server.listen(100)
-
+list_of_clients = []
 def clientthread(conn, addr):
-    conn.send("Welcome!")
+    conn.send(bytes("Welcome!", "UTF-8"))
     while True:
         try:
             message = conn.recv(2048)
